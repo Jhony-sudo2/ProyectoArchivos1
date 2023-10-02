@@ -1,0 +1,14 @@
+<body>    
+    <nav>
+        <ul>
+            <li > <a [routerLink]="['/admin/Reportes']"><h1>Reporte</h1></a></li>
+            <li > <a [routerLink]="['/admin/Tarjetas']"><h1>Tarjetas </h1></a></li>
+            <li > <a [routerLink]="['/admin/Registro']"><h1>Registro</h1></a></li>
+            <li><a [routerLink]="['/admin/usuario']"><h1>Usuario</h1></a></li>
+            <li>
+                <button class="input-box" (click)="CerrarSesion()"><h1>Cerrar Sesion</h1> </button>
+            </li>
+        </ul>
+    </nav>
+</body>
+<router-outlet></router-outlet>

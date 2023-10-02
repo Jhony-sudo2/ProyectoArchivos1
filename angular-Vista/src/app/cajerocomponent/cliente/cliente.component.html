@@ -1,0 +1,38 @@
+<body>
+    <div class="wrapper">
+        <form #formulario ="ngForm" (ngSubmit)="IngresarCliente(formulario)">
+            <h1>Registro de Cliente</h1>
+            <div class="input-box">
+                <input type="text" name="nombre" placeholder="nombre" [(ngModel)]="cliente.nombre" required #nombre="ngModel">
+                <i class='bx bx-user'></i>
+                <div  *ngIf="nombre.invalid">
+                    Nombre obligatorio
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="text" name="apellidos" placeholder="apellidos" [(ngModel)]="cliente.apellido" required #apellido="ngModel">
+                <i class='bx bx-user'></i>
+                <div  *ngIf="apellido.invalid">
+                    Apellidos obligatorio
+                </div>
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="telefono" placeholder="telefono"  [(ngModel)]="cliente.telefono" #telefono="ngModel"  required pattern="^[0-9]{8}$">
+                <i class='bx bx-phone'></i>
+                <div  *ngIf="telefono.invalid">
+                    Telefono obligatorio,8 digitos
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="text" name="nit" placeholder="nit"   [(ngModel)]="cliente.nit"  required #nit="ngModel">
+                <i class='bx bxs-id-card' ></i>
+                <div  *ngIf="nit.invalid">
+                    Nit obligatorio
+                </div>       
+            </div>
+            <button type="submit" [disabled]="!nombre.valid || !apellido.valid || !telefono.valid || !nit.valid" class="btn">Ingresar Cliente</button>
+        </form>
+
+    </div>
+</body>

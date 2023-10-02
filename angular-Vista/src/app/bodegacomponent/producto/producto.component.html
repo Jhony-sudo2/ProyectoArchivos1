@@ -1,0 +1,37 @@
+<body>
+    <div class="wrapper">
+        <form #miformulario="ngForm" (submit)="GuardarProducto(miformulario)">
+            <h1>Producto Nuevo</h1>
+            <div class="input-box">
+                <input type="text" name="id" placeholder="id" [(ngModel)]="producto.id" #id="ngModel" required>
+                <i class='bx bx-user'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="text" name="nombre" placeholder="nombre"  [(ngModel)]="producto.nombre" #nombre="ngModel" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" name="marca" placeholder="marca" [(ngModel)]="producto.marca" #marca="ngModel" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" name="precio" placeholder="precio" [(ngModel)]="producto.precio" #precio="ngModel" required pattern="^[0-9]+(\.[0-9]+)?$" >
+                <i class='bx bx-money-withdraw' ></i>
+                <div *ngIf="precio.invalid">
+                    Solo numeros
+                </div>
+            </div>
+
+            <div class="input-box">
+                <input type="number" name="pasillo" placeholder="pasillo"  [(ngModel)]="producto.pasillo" #pasillo="ngModel" required pattern="^[1-9][0-9]*$">
+                <i class='bx bx-store-alt' ></i>
+                <div *ngIf="pasillo.invalid">
+                    Solo numeros entero
+                </div>
+            </div>
+            <button type="submit" class="btn" [disabled]="!id.valid || !nombre.valid || !marca.valid || !pasillo.valid || !precio.valid">Crear Producto</button>
+        </form>
+
+    </div>
+</body>

@@ -1,0 +1,19 @@
+<body>
+    <div class="wrapper">
+        <form (ngSubmit)="AgregarAEstante()" >
+            <h1>Agregar Producto a estantes</h1>
+            <div class="input-box">
+                <input type="text" name="producto" placeholder="producto" [(ngModel)]="estante.producto" #producto="ngModel" required>
+                <i class='bx bx-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="number" name="cantidad" placeholder="cantidad" [(ngModel)]="estante.cantida" #cantidad="ngModel" required pattern="^[1-9][0-9]*$">
+                <i class='bx bx-happy'></i>
+                <div *ngIf="cantidad.invalid">
+                    solo numeros enteros
+                </div>
+            </div>
+            <button type="submit" class="btn" [disabled]="producto.invalid || cantidad.invalid">Ingresar a estanterias</button>
+        </form>
+    </div>
+</body>

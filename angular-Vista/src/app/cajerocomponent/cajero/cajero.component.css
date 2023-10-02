@@ -1,0 +1,38 @@
+h1{
+    color: #fff;
+}
+
+body{
+    background-color: transparent;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;    
+    padding: 16px 16px;
+    text-decoration: none;
+}
+
+nav li:last-child {
+    float: right; 
+    margin-right: 10px;
+}
+
+nav button {
+    color: #fff;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+}

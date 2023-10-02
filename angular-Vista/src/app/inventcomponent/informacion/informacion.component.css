@@ -1,0 +1,13 @@
+h1 {
+    color: white;
+}
+
+button{
+    color: black;
+    background-color: white;
+}
+
+label{
+    color: red;
+    background-color: black;
+}

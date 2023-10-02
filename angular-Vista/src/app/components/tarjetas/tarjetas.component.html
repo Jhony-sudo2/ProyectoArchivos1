@@ -1,0 +1,23 @@
+<body>
+    <div class="wrapper">
+    <form action="" (ngSubmit)="AsignarTarjeta()">
+        <h1>Registro de Tarjetas</h1>
+        <div class="input-box">
+            Cliente:
+            <select [(ngModel)]="tarjeta.cliente" name="cliente">
+                <option *ngFor="let opcion of Clientes" >{{opcion}}</option>
+            </select>
+        </div>
+        <div class="input-box">
+            <select [(ngModel)]="tarjeta.tipo" name="tipo">
+                <option selected="true" disabled="disabled">Tipo de Tarjeta</option>
+                <option value=1>Comun</option>
+                <option value=2>Oro</option>
+                <option value=3>Platino</option>
+                <option value=4>Diamante</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Asignar</button>
+    </form>
+    </div>
+</body>

@@ -1,0 +1,71 @@
+<body>
+    <div class=" input-box">
+        <button type="button" (click)="ngOnInit()">CANCELAR</button>
+    </div>
+    <div class="wrapper">
+        <form (ngSubmit)="Vender()">
+            <h1>Nueva Venta</h1>
+            <div class="input-box">
+                <div class="input-box">
+                    <input type="text" name="nit" placeholder="nit cliente" [(ngModel)]="cliente.nit" #nit="ngModel" required="" [disabled]="cliente.nombre != undefined">
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="input-box" *ngIf="cliente.nombre === undefined">
+                    <button type="button" class=" btn" (click)="CargarCliente(nit.value)" [disabled]="!nit.valid">Cargar Cliente</button>
+                </div>
+            </div>
+            <form #Formulario="ngForm" (ngSubmit)="Agregar(Formulario)" *ngIf="cliente.nombre != undefined">
+                <div class="input-box">
+                    Producto:
+                    <select name="codigo" [(ngModel)]="Codigo">
+                        <option *ngFor="let p of ListaProducto">{{p.id}}</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <input type="number" name="cantidad" placeholder="Cantidad" ngModel>
+                    <i class='bx bx-user'></i>
+                </div>
+                <button type="submit" class="btn">Agregar Producto al Carro</button>
+                <div class="input-box" *ngIf="tarjeta != undefined">
+                    <h3>Puntos disponibles: {{tarjeta.puntos}}</h3>
+                    <input type="text" name="descuento" placeholder="descuento" [disabled]="tarjeta.puntos < 0" [(ngModel)]="cantdescuento" #descuento="ngModel" pattern="^[0-9]+$">
+                    <div *ngIf="descuento.invalid || descuento.value > Total.valor || descuento.value > tarjeta.puntos" class="error-message">
+                        {{ descuento.invalid ? 'Solo números' : descuento.value > Total.valor ? 'Valor menor al total' : 'Puntos insuficientes'}}
+                    </div>
+                    <button type="button">Aplicar Descuento</button>
+                </div>
+                <br>
+                <div class="input-box">
+                    <h3>TOTAL: {{Total.valor}}</h3>
+                    <h3>TOTALCD:{{TotalDescuento.valor}}</h3>
+                </div>
+            </form>
+            <button type="submit" class="btn" *ngIf="cliente.nombre!= undefined" [disabled]="!nit.valid || Detalle.length == 0 || continuar">Vender</button>
+        </form>
+
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Producto</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody class="table-dark">
+            <tr *ngFor="let Producto of Detalle; let i = index">
+                <td>{{Producto.Nombre}}</td>
+                <td>{{Producto.PrecioU}}</td>
+                <td>{{Producto.Cantidad}}</td>
+                <td>{{Producto.Total}}</td>
+                <td><button (click)="eliminarFila(i)">Eliminar</button></td>
+            </tr>  
+            </tbody>
+            <tbody class="table-dark">
+                <th>Total: {{Total.valor}}</th>
+            </tbody> 
+        </table>    </div>
+
+</body>

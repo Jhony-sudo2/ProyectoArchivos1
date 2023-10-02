@@ -1,0 +1,35 @@
+
+<div class="col-md-6 offset-md-3">
+    <form (submit)="getProducto(codigo)">
+        <div class="form-group">
+            <h1>Codigo</h1>
+            <input type="text" class="form-control" name="codigo" [(ngModel)]="codigo"  #id="ngModel" required>
+        </div>
+        <button type="submit" class="btn" [disabled]="id.invalid">Informacion</button>
+    </form>
+
+<div>
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Pasillo</th>
+        </tr>
+        </thead>
+        <tbody class="table-dark">
+        <tr >
+            <td>{{informacion.id}}</td>
+            <td>{{informacion.nombre}}</td>
+            <td>{{informacion.marca}}</td>
+            <td>{{informacion.precio}}</td>
+            <td>{{informacion.pasillo}}</td>
+        </tr>  
+        </tbody>
+    </table>    
+</div>
+</div>
+
+

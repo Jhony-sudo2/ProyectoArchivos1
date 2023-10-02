@@ -1,0 +1,44 @@
+<body>
+    <div class="wrapper">
+        <form #miFormulario="ngForm" (ngSubmit)="GuardarUsuario()">
+            <h1>Registro de Usuario</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Usuario" name="usuario" [(ngModel)]="user.nombre" required #nombre="ngModel" pattern="^\S{8,}$">
+                <i class='bx bxs-id-card'></i>
+                <div  *ngIf="nombre.invalid">
+                    Nombre de Usuario Invalido
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="contrasena" name="contrasena" [(ngModel)]="user.contrasena" required #contrasena="ngModel" pattern="^\S{8,}$" >
+                <i class='bx bx-user'></i>
+                <div  *ngIf="contrasena.invalid">
+                    Contrasena invalida
+                </div>
+            </div>
+            <div class="input-box">
+                Id Empleado sin Usuario:
+                <select name="select" [(ngModel)]="user.empleado">
+                    <option *ngFor="let opcion of Lista ">{{opcion.id}}</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <select [(ngModel)]="user.tipo" name="tipo" required>
+                    <option selected="true" disabled="disabled">Tipo Usuario</option>
+                    <option value=4>Cajero</option>
+                    <option value=3>Bodega</option>
+                    <option value=2>Inventario</option>
+                </select>
+            </div>
+            <div class="input-box" *ngIf="user.tipo == 4">
+                <input type="number" placeholder="caja" name="caja" [(ngModel)]="user.caja" required #caja="ngModel" >
+                <i class='bx bx-user'></i>
+            </div>
+
+            <button type="submit" class="btn" [disabled]="!nombre.valid || !contrasena.valid">
+                Crear Usuario
+            </button>
+        </form>
+    </div>
+    </body>
+    

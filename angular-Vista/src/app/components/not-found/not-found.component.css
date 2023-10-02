@@ -1,0 +1,19 @@
+*{
+}
+
+body{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: transparent;
+}
+
+h1{
+    color: aliceblue;
+}
+
+div{
+    align-items: end;
+}
