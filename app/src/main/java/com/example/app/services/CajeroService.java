@@ -1,9 +1,11 @@
 package com.example.app.services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,8 +53,18 @@ public class CajeroService {
         clienteRepositorie.save(clienteModel);
     }
 
+    @Transactional
     public ArrayList<ProductoModel> getProductos(String Sucursal){
-        return productoRepositorie.findBySucursal(Sucursal);
+        System.out.println("PRODUCTOS");
+        String sql = "SELECT P.Id, P.Nombre, P.Marca, P.Sucursal, P.Precio, P.Pasillo, E.Cantida " +
+                 "FROM manejoproducto.Estantes AS E " +
+                 "JOIN manejoproducto.Producto AS P ON E.Producto = P.Id " +
+                 "WHERE E.Sucursal = :sucursal"; 
+    
+        Query query = entityManager.createNativeQuery(sql, ProductoModel.class);
+        query.setParameter("sucursal", Sucursal);
+        List<ProductoModel> productos = query.getResultList();
+        return new ArrayList<>(productos);
     }
 
     @Transactional

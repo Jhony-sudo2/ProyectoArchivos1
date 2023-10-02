@@ -1,17 +1,20 @@
 package com.example.app.services;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.app.Reportes.Reporte1;
 import com.example.app.models.ClienteModel;
 import com.example.app.models.EmpleadoModel;
 import com.example.app.models.TarjetaModel;
@@ -83,29 +86,43 @@ public class AdminService {
     }
 
     @Transactional
-    public ArrayList<Object[]> Reporte1(){
-        String sql = "SELECT p.Sucursal, p.Nombre AS NombreProducto, d.Producto, SUM(d.Cantidad) AS TotalProductosVendidos " +
+    public ArrayList<Reporte1> Reporte1(){
+        ArrayList<Reporte1> resultado = new ArrayList<Reporte1>();
+        String sql = "SELECT p.Sucursal, p.Nombre AS NombreProducto, d.Producto, SUM(d.Cantidad) AS Total " +
              "FROM ventas.Descripcion AS d " +
              "JOIN manejoproducto.Producto AS p ON d.Producto = p.Id " +
              "GROUP BY p.Sucursal, p.Nombre, d.Producto " +
-             "ORDER BY TotalProductosVendidos DESC";
+             "ORDER BY Total DESC LIMIT 10";
 
-        ArrayList<Object[]> resultado = (ArrayList<Object[]>)entityManager.createNativeQuery(sql)
-        .getResultList();
+        Query query = entityManager.createNativeQuery(sql);
+        List<Object[]> resultList = query.getResultList();
+        for(Object[] row:resultList){
+            Reporte1 tmp = new Reporte1();
+            tmp.setSucursal((String)row[0]);
+            tmp.setNombre((String)row[1]);
+            tmp.setProducto((String)row[2]);
+            tmp.setTotal((BigInteger) row[3]);
+            resultado.add(tmp);
+        }
         return resultado;
     }
+
     public void Reporte2(){
         
     }
+
     public void Reporte3(){
         
     }
+
     public void Reporte4(){
         
     }
+
     public void Reporte5(){
         
     }
+
     public void Reporte6(){
         
     }

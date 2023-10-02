@@ -1,0 +1,32 @@
+<div class="col-md-6 offset-md-3">
+    <form (submit)="GenerarReporte()" name="formulario">
+        <h1>Reporte</h1>
+        <div class="form-group">
+            <select [(ngModel)]="tipo" name="tipo">
+                <option value=4>10 articulos mas vendido</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">Generar Reporte</button>
+    </form>
+
+<div>
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>sucursal</th>
+            <th>Nombre</th>
+            <th>codigo</th>
+            <th>Total Vendidos</th>
+        </tr>
+        </thead>
+        <tbody class="table-dark">
+        <tr *ngFor="let opcion of reporte1">
+            <td>{{opcion.sucursal}}</td>
+            <td>{{opcion.nombre}}</td>
+            <td>{{opcion.producto}}</td>
+            <td>{{opcion.total}}</td>
+        </tr>  
+        </tbody>
+    </table>    
+</div>
+</div>

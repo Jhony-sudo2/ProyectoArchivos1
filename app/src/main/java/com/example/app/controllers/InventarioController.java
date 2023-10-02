@@ -32,6 +32,16 @@ public class InventarioController {
         return servicio.getProducto(productoModel.getId(),productoModel.getSucursal());
     }
 
+    @PostMapping("/existencia")
+    public int getExistenciaBodega(@RequestBody String codigo){
+        return servicio.getAlmacenado(codigo);
+    }
+
+    @PostMapping("/existencia2")
+    public int getExistenciaEstante(@RequestBody String codigoString){
+        return servicio.getEstantes(codigoString);
+    }
+
 
     
 }

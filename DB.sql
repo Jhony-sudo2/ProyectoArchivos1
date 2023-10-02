@@ -19,13 +19,6 @@ CREATE TABLE rtienda.Sucursal(
     FOREIGN KEY(Tienda) REFERENCES rtienda.Tienda(Id)
 );
 
-CREATE TABLE rtienda.Administrador(
-    Id VARCHAR(10) NOT NULL,
-    Nombre VARCHAR(20) NOT NULL,
-    Contrasena VARCHAR(20) NOT NULL,
-    PRIMARY KEY(Id),
-    FOREIGN KEY(Id) REFERENCES rtienda.Tienda(Id)
-);
 
 CREATE TABLE rtienda.Empleado(
     Id SERIAL,
@@ -129,46 +122,6 @@ CREATE TABLE ventas.Descripcion(
     FOREIGN KEY(Producto) REFERENCES manejoproducto.Producto(Id)
 );
 
-
-CREATE OR REPLACE FUNCTION total_venta()
-RETURNS TRIGGER AS 
-$$
-DECLARE
-    total_venta INT;
-BEGIN
-    SELECT SUM(Total) INTO total_venta FROM venta.Descripcion WHERE Factura = NEW.Factura;
-    UPDATE ventas.venta
-    SET Total = total_venta;
-    RETURN NEW;
-END;
-$$ 
-LANGUAGE plpgsql;
-CREATE TRIGGER actualizar_totalventa
-AFTER INSERT ON ventas.venta
-FOR EACH ROW
-EXECUTE FUNCTION total_venta();
-
-
-CREATE OR REPLACE FUNCTION calcular_total()
-RETURNS TRIGGER AS 
-$$
-BEGIN
-    UPDATE ventas.Descripcion
-    SET Total = NEW.Cantidad * p.Precio
-    FROM manejoproducto.producto p
-    WHERE ventas.Descripcion.Producto = p.Id AND ventas.Descripcion.Factura = NEW.Factura;
-    RETURN NEW;
-
-END;
-$$ 
-LANGUAGE plpgsql;
-CREATE TRIGGER actualizar_total
-AFTER INSERT ON ventas.Descripcion
-FOR EACH ROW
-EXECUTE FUNCTION calcular_total();
-
-
-
 CREATE ROLE Cajero;
 CREATE ROLE Bodega;
 CREATE ROLE Inventario;
@@ -194,7 +147,6 @@ GRANT INSERT,UPDATE,SELECT ON TABLE rcliente.Cliente TO Administrador;
 GRANT INSERT,UPDATE,SELECT ON TABLE rcliente.tarjeta TO Administrador;
 GRANT INSERT,UPDATE,SELECT ON TABLE manejoproducto.producto TO Administrador;
 GRANT INSERT,UPDATE,SELECT ON TABLE manejoproducto.Inventario TO Administrador;
-
 GRANT INSERT,UPDATE,SELECT ON TABLE ventas.Descripcion TO Administrador;
 GRANT INSERT,UPDATE,SELECT ON TABLE ventas.venta TO Administrador;
 
@@ -216,12 +168,6 @@ GRANT Cajero TO Usuario1;
 GRANT Bodega TO Usuario2;
 GRANT Inventario TO Usuario3;
 GRANT Administrador TO Usuario4;
-
-
-
-psql -h localhost -U usuario1 -d tienda
-
-
 
 
 

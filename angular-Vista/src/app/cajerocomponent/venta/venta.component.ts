@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Cliente } from 'src/app/Clases/Cliente';
 import { Descripcion } from 'src/app/Clases/Descripcion';
 import { Empleado } from 'src/app/Clases/Empleado';
+import { Estante } from 'src/app/Clases/Estante';
 import { Producto } from 'src/app/Clases/Producto';
 import { Tarjeta } from 'src/app/Clases/Tarjeta';
 import { Usuario } from 'src/app/Clases/Usuario';
@@ -29,13 +30,14 @@ export class VentaComponent implements OnInit{
   continuar:boolean = true
   usuariot:Usuario = JSON.parse(this.cookie.get('Usuario'))
   empleado:Empleado = JSON.parse(this.cookie.get('Empleado'))
-
+  
   constructor(private servicio:VentaService,private cookie:CookieService){}
   ngOnInit(): void {
     this.factura = this.generarCodigoFactura()
     this.Detalle = [];
     this.cliente = new Cliente();
     this.servicio.getProductos(this.empleado.sucursal).subscribe(data=>{
+      console.log(data);
       this.ListaProducto = data;
     })
   }

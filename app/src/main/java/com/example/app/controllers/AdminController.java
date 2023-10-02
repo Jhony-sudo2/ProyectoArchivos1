@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.app.Reportes.Reporte1;
 import com.example.app.models.EmpleadoModel;
 import com.example.app.models.TarjetaModel;
 import com.example.app.models.UserModel;
@@ -54,8 +57,9 @@ public class AdminController {
         return adminService.GuardarUsuario(user);
     }
 
-    @GetMapping("/reporte1")
-    public ArrayList<Object[]> getReporte1(){
+    @GetMapping("/reporte")
+    @ResponseBody
+    public ArrayList<Reporte1> getReporte1(){
         return adminService.Reporte1();
     }
 

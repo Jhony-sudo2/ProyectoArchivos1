@@ -14,6 +14,8 @@ export class InformacionComponent implements OnInit{
   constructor(private servicio:InventarioService,private cookie:CookieService){}
 
   informacion:Producto
+  existencia1:any
+  existencia2:any
   codigo:String
   empleado:Empleado = JSON.parse(this.cookie.get('Empleado'))
 
@@ -24,11 +26,14 @@ export class InformacionComponent implements OnInit{
   }
 
   public getProducto(id:String){
-    console.log('codigo' + id);
     
     this.servicio.getProducto(id,this.empleado.sucursal).subscribe(data =>{
-      if(data != null)
-      this.informacion = data
+      if(data != null){
+        this.informacion = data
+        console.log("Codigo mandado: " + id);
+        this.servicio.getInventario(id).subscribe(data =>{ this.existencia1 = data})
+        this.servicio.getEstante(id).subscribe(data =>{this.existencia2 = data})
+      }
       else alert('El producto no existe en la sucursal')
       
     })

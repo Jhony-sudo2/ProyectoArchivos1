@@ -22,7 +22,6 @@ export class VentaService {
   public AgregarDetalle(codigo:String,Cantidad:number,Detalle:DProducto[],obj: {valor:number},Lista:Producto[]){
     let tmp:DProducto = new DProducto(codigo,Cantidad);
     let tmp2:Producto|undefined = Lista.find(item => item.id == codigo);
-
     if(tmp2 != null){
       tmp.Total = Cantidad * tmp2.precio;
       tmp.Nombre = tmp2.nombre;

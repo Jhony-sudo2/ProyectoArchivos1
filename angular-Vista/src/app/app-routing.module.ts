@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { AdminComponent } from './admin/admin.component';
-import { ReporteComponent } from './components/reporte/reporte.component';
 import { TarjetasComponent } from './components/tarjetas/tarjetas.component';
 import { RegistrocComponent } from './components/registroc/registroc.component';
 import { CajeroComponent } from './cajerocomponent/cajero/cajero.component';
@@ -17,13 +16,14 @@ import { InventarioComponent } from './inventcomponent/inventario/inventario.com
 import { EstanteComponent } from './inventcomponent/estante/estante.component';
 import { IngresoComponent } from './bodegacomponent/ingreso/ingreso.component';
 import { UsuarioComponent } from './components/usuario/usuario/usuario.component';
+import { Reporte2Component } from './components/reporte2/reporte2.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent,canActivate:[authGuard]},
   {path:'admin',component:AdminComponent,
     children:[
     {path:'',redirectTo:'Registro',pathMatch:'full'},
-    {path:'Reportes',component:ReporteComponent},
+    {path:'Reportes',component:Reporte2Component},
     {path:'Tarjetas',component:TarjetasComponent},
     {path:'Registro',component:RegistrocComponent},    
     {path:'usuario',component:UsuarioComponent}

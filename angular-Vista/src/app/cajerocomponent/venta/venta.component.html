@@ -26,21 +26,23 @@
                     <i class='bx bx-user'></i>
                 </div>
                 <button type="submit" class="btn">Agregar Producto al Carro</button>
-                <div class="input-box" *ngIf="tarjeta != undefined">
-                    <h3>Puntos disponibles: {{tarjeta.puntos}}</h3>
-                    <input type="text" name="descuento" placeholder="descuento" [disabled]="tarjeta.puntos < 0" [(ngModel)]="cantdescuento" #descuento="ngModel" pattern="^[0-9]+$">
-                    <div *ngIf="descuento.invalid || descuento.value > Total.valor || descuento.value > tarjeta.puntos" class="error-message">
-                        {{ descuento.invalid ? 'Solo números' : descuento.value > Total.valor ? 'Valor menor al total' : 'Puntos insuficientes'}}
-                    </div>
-                    <button type="button">Aplicar Descuento</button>
-                </div>
-                <br>
                 <div class="input-box">
                     <h3>TOTAL: {{Total.valor}}</h3>
                     <h3>TOTALCD:{{TotalDescuento.valor}}</h3>
                 </div>
+                <div class="input-box" *ngIf="tarjeta != undefined">
+                    <h3>Puntos disponibles: {{tarjeta.puntos}}</h3>
+                    <input type="text" name="descuento" placeholder="descuento" [disabled]="tarjeta.puntos < 0" [(ngModel)]="cantdescuento" #descuento="ngModel" pattern="^[0-9]+$">
+                    <div *ngIf="descuento.invalid || descuento.value > Total.valor || descuento.value > tarjeta.puntos" class="error-message">
+                        {{ descuento.invalid ? 'Solo números' : descuento.value > Total.valor ? 'Valor mayor al total' : 'Puntos insuficientes'}}
+                    </div>
+                    <br>
+                    <button type="button" class="btn" [disabled]="Detalle.length == 0 || descuento.invalid">Vender</button>
+                </div>
+                <br>
             </form>
-            <button type="submit" class="btn" *ngIf="cliente.nombre!= undefined" [disabled]="!nit.valid || Detalle.length == 0 || continuar">Vender</button>
+            <button type="submit" class="btn" *ngIf="cliente.nombre!= undefined && tarjeta == undefined" [disabled]="Detalle.length == 0 ">Vender</button>
+            
         </form>
 
     </div>

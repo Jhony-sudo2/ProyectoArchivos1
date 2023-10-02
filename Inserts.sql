@@ -81,6 +81,4 @@ INSERT INTO rtienda.Usuario VALUES
 ('GNURichard','esgnu_linuxnolinux',3,33),
 
 
-//Producto
-
 INSERT INTO manejoproducto.producto VALUES('AB','Jugo V8','FRUTAL','1',3.25,2);

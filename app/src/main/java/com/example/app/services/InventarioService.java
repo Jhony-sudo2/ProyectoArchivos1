@@ -52,7 +52,16 @@ public class InventarioService {
                 return HttpStatus.OK;
             }else return HttpStatus.CONFLICT;
         }else return HttpStatus.BAD_GATEWAY;
+    }
 
+    public int getEstantes(String codigo){
+        System.out.println("CODIGO: " + codigo);
+        return estanteRepositorie.findById(codigo).get().getCantida();
+    }
+
+    public int getAlmacenado(String codigo){
+        System.out.println("CODIGO: " + codigo);
+        return inventarioRepositorie.findById(codigo).get().getExistencia();
 
     }
     

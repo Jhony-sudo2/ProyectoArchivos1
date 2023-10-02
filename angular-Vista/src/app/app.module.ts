@@ -21,6 +21,7 @@ import { EstanteComponent } from './inventcomponent/estante/estante.component';
 import { IngresoComponent } from './bodegacomponent/ingreso/ingreso.component';
 import { UsuarioComponent } from './components/usuario/usuario/usuario.component';
 import { CookieService } from 'ngx-cookie-service';
+import { Reporte2Component } from './components/reporte2/reporte2.component';
 
 const appRoutes:Routes=[]
 @NgModule({
@@ -41,6 +42,7 @@ const appRoutes:Routes=[]
     EstanteComponent,
     IngresoComponent,
     UsuarioComponent,
+    Reporte2Component,
   ],
   imports: [
     BrowserModule,
