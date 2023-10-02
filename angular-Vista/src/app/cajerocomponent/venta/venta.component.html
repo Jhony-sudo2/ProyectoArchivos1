@@ -37,7 +37,7 @@
                         {{ descuento.invalid ? 'Solo números' : descuento.value > Total.valor ? 'Valor mayor al total' : 'Puntos insuficientes'}}
                     </div>
                     <br>
-                    <button type="button" class="btn" [disabled]="Detalle.length == 0 || descuento.invalid">Vender</button>
+                    <button type="button" class="btn" [disabled]="Detalle.length == 0 || descuento.invalid" (click)="Vender()">Vender</button>
                 </div>
                 <br>
             </form>
